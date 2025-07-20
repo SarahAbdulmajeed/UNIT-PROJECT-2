@@ -11,36 +11,61 @@
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </head>
 
-<body class="font-[Cairo]">
-  <nav class="bg-white border-b shadow-sm">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-      
-      <!-- Logo -->
-      <a href="#" class="flex items-center">
-        <img src="{% static 'images/logo_mira7.png' %}" class="h-12 ml-2" alt="Mirah Logo">
-      </a>
+<body class="font-[Cairo] min-h-screen flex flex-col">
+    <nav class="bg-white border-b shadow-sm">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        
+            <!-- Logo -->
+            <a href="#" class="flex items-center">
+                <img src="{% static 'images/logo_mirah_03.png' %}" class="h-12 ml-2" alt="Mirah Logo">
+            </a>
 
-      <!-- Toggle button -->
-      <button data-collapse-toggle="navbar-main" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-600 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none" aria-controls="navbar-main" aria-expanded="false">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
+            <!-- Toggle button -->
+            <button data-collapse-toggle="navbar-main" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-600 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none" aria-controls="navbar-main" aria-expanded="false">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
 
-      <!-- Navigation links -->
-      <div class="hidden w-full md:block md:w-auto" id="navbar-main">
-        <ul class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 mt-4 md:mt-0 bg-white md:bg-transparent p-4 md:p-0 border md:border-none rounded-sm ">
-          <li><a href="{% url 'main:home_view' %}">Home</a></li>
-          <li><a href="#">Animals</a></li>
-          <li><a href="#">Groups</a></li>
-          <li><a href="#">Health</a></li>
-          <li><a href="#">Feeding</a></li>
-          <li><a href="#">Reports</a></li>
-          <li>
-            <a href="#"><img class="w-6 h-6 object-contain" src="{% static 'images/icon_translation.png' %}" alt="Translate"></a>
-          </li>
-        </ul>
-      </div>
+            <!-- Navigation links -->
+            <div class="hidden w-full md:block md:w-auto" id="navbar-main">
+                <ul class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 mt-4 md:mt-0 bg-white md:bg-transparent p-4 md:p-0 border md:border-none rounded-sm text-[#315052]">
+                    <li class="hover:underline underline-offset-8 {% block current_page_home%} {% endblock %}"><a href="{% url 'main:home_view' %}">Home</a></li>
+                    <li class="hover:underline underline-offset-8 {% block current_page_animals %} {% endblock %}"><a href="#">Animals</a></li>
+                    <li class="hover:underline underline-offset-8 {% block current_page_groups %} {% endblock %}"><a href="#">Groups</a></li>
+                    <li class="hover:underline underline-offset-8 {% block current_page_health %} {% endblock %}"><a href="#">Health</a></li>
+                    <li class="hover:underline underline-offset-8 {% block current_page_feeding %} {% endblock %}"><a href="#">Feeding</a></li>
+                    <li class="hover:underline underline-offset-8 {% block current_page_reports %} {% endblock %}"><a href="#">Reports</a></li>
+                    <li>
+                        <a href="#"><img class="w-6 h-6 object-contain" src="{% static 'images/icon_translation_02.png' %}" alt="Translate"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <main class="flex-grow w-[90%] self-center">
+        <div>
+            <h2 class="text-3xl font-semibold">{% block pageTitle %}{% endblock %}</h2>
+        </div>
+    {% block content %}
+    {% endblock %}
+    </main>
+
+    <div class="bg-[#315052]">
+        <footer class="w-[90%] place-self-center py-4">
+            <div class="flex md:flex-row flex-col justify-start md:justify-between">
+                <div class="flex flex-col place-self-center gap-4">
+                    <a href="#" class="place-self-center"><img src="{% static 'images/logo_mirah_02.png' %}" class="h-12 ml-2" alt="Mirah Logo"></a>
+                    <p class="text-[#e4dfdf]">© 2025 Mirah. All rights reserved</p>
+                </div>
+                <nav class="my-4 content-center">
+                    <ul class="flex md:flex-row flex-col place-self-center gap-4 text-[#e4dfdf]">
+                        <li>About</li>
+                        <li>Contact</li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
     </div>
-  </nav>
+
 </body>
 </html>
