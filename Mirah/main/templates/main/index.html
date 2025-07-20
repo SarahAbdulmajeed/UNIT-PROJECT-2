@@ -10,4 +10,35 @@ font-bold underline
 {% endblock %}
 
 {% block content %}
+
+
+<div class="relative w-full overflow-hidden">
+  <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-[50vh] object-cover z-0">
+    <source src="https://ik.imagekit.io/mirah/intro.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="relative z-10 flex flex-col justify-center items-center h-[50vh] text-[#e4dfdf] bg-gradient-to-r from-[#315052]/100 from-0% via-[#315052]/75 via-50% to-[#315052]/100 to-100%">
+    <h1 class="text-5xl font-bold mb-4">Welcome To Mirah</h1>
+    <p class="text-xl">A smart system to track, document, and manage your herd.</p>
+  </div>
+</div>
+
+<div class="justify-items-center my-8 py-4">
+    <p class="text-2xl mb-8 font-bold">Start by</p>
+    <div class="flex md:flex-row  flex-col justify-center gap-20">
+        <div class="flex flex-col items-center gap-4 w-40 text-center">
+            <span class="material-symbols-outlined">stacks</span>
+            <a><button class="bg-[#315052] text-[#e4dfdf] py-2 px-4 rounded-lg font-semibold">Create a Group</button></a>
+            <p>To organize your animals by type or purpose.</p>
+        </div>
+        <span class="self-center font-bold">OR</span>
+        <div class="flex flex-col items-center gap-4 w-40 text-center">
+            <span class="material-symbols-outlined">pets</span>
+            <a><button class="bg-[#315052] text-[#e4dfdf] py-2 px-4 rounded-lg font-semibold">Add an Animal</button></a>
+            <p>To start tracking one directly</p>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
