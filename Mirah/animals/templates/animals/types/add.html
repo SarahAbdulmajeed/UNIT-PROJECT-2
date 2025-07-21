@@ -9,8 +9,31 @@ Add Animal Type
 font-bold underline
 {% endblock %}
 
+
 {% block content %}
+<div class="w-[80%] justify-self-center ">
+    <div>
+        <h2 class="text-3xl pt-8 pb-12 font-semibold text-[--spectra-400]">Add Animal Type</h2>
+    </div>
+    <div>
+        <form action="{% url 'animals:add_type_view'%}" method="post">
+            {% csrf_token %}
+            <div class="flex flex-col bg-[--bon-jour-20] rounded-lg border border-1 border-[--spectra-100]">
+                <div
+                    class="rounded-t-lg bg-[--spectra-100] text-[--bon-jour-30] font-semibold h-8 content-center justify-items-center">
+                    <p>Create Animal Type</p>
+                </div>
+                <div class="flex sm:flex-row flex-col w-full py-2 place-content-around gap-2">
+                    <label class="sm:w-[25%] sm:text-right text-center content-center">Type name</label>
+                    <input class="sm:w-[70%] border p-2" type="text" name="name" id="name" minlength="1"
+                        maxlength="1024" required>
+                </div>
+                <div class="rounded-b-lg w-full text-center">
+                    <input class="font-semibold bg-[--spectra-70] hover:bg-[--spectra-100] text-[--spectra-400] my-2 px-10 py-2 rounded-md" type="submit" value="Add Type" />
+                </div>
+            </div>
+        </form>
 
-<h1>Add animal type</h1>
-
+    </div>
+</div>
 {% endblock %}

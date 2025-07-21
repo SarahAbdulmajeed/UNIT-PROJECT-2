@@ -9,6 +9,32 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+  <style>
+    :root { 
+ 
+        /* 🏷️ 1 Group */
+        /* 🎨 Spectra */
+        --spectra-900: #060a0b; /* 900 */
+        --spectra-700: #132022; /* 700 */
+        --spectra-600: #223739; /* 600 */
+        --spectra-400: #315052; /* 400 */
+        --spectra-100: #61797a; /* 100 */
+        --spectra-70: #91a2a3; /* 70 */
+        --spectra-40: #c3cccd; /* 40 */
+        --spectra-10: #f7f8f8; /* 10 */
+
+        /* 🎨 Bon Jour */
+        --bon-jour-700: #2a2526; /* 700 */
+        --bon-jour-600: #353031; /* 600 */
+        --bon-jour-400: #524d4e; /* 400 */
+        --bon-jour-100: #7b7677; /* 100 */
+        --bon-jour-70: #a59fa0; /* 70 */
+        --bon-jour-40: #cbc5c6; /* 40 */
+        --bon-jour-30: #E4DFDF; /* 30 */
+        --bon-jour-20: #edeaea; /* 20 */
+        --bon-jour-10: #f7f6f6; /* 10 */
+    }
+  </style>
 </head>
 
 <body class="font-[Cairo] min-h-screen flex flex-col">
@@ -27,7 +53,7 @@
 
             <!-- Navigation links -->
             <div class="hidden w-full md:block md:w-auto" id="navbar-main">
-                <ul class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 mt-4 md:mt-0 bg-white md:bg-transparent p-4 md:p-0 border md:border-none rounded-sm text-[#315052]">
+                <ul class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 mt-4 md:mt-0 bg-white md:bg-transparent p-4 md:p-0 border md:border-none rounded-sm text-[--spectra-400]">
                     <li class="hover:underline underline-offset-8 {% block current_page_home%} {% endblock %}"><a href="{% url 'main:home_view' %}">Home</a></li>
                     <li class="hover:underline underline-offset-8 {% block current_page_animals %} {% endblock %}"><a href="{% url 'animals:animals_view' %}">Animals</a></li>
                     <li class="hover:underline underline-offset-8 {% block current_page_groups %} {% endblock %}"><a href="#">Groups</a></li>
@@ -43,22 +69,22 @@
     </nav>
 
     <main class="flex-grow w-full self-center">
-        <div>
-            <h2 class="text-3xl font-semibold">{% block pageTitle %}{% endblock %}</h2>
-        </div>
-    {% block content %}
-    {% endblock %}
+        {% block content %}
+            <div class="w-[80%] justify-self-center">
+            </div>
+        {% endblock %}
     </main>
 
-    <div class="bg-[#315052]">
+
+    <div class="bg-[--spectra-400]">
         <footer class="w-[90%] place-self-center py-4">
             <div class="flex md:flex-row flex-col justify-start md:justify-between">
                 <div class="flex flex-col place-self-center gap-4">
                     <a href="#" class="place-self-center"><img src="{% static 'images/logo_mirah_02.png' %}" class="h-12 ml-2" alt="Mirah Logo"></a>
-                    <p class="text-[#e4dfdf]">© 2025 Mirah. All rights reserved</p>
+                    <p class="text-[--bon-jour-30]">© 2025 Mirah. All rights reserved</p>
                 </div>
                 <nav class="my-4 content-center">
-                    <ul class="flex md:flex-row flex-col place-self-center gap-4 text-[#e4dfdf]">
+                    <ul class="flex md:flex-row flex-col place-self-center gap-4 text-[--bon-jour-30]">
                         <li>About</li>
                         <li>Contact</li>
                     </ul>
