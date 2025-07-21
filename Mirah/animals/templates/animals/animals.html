@@ -11,7 +11,32 @@ font-bold underline
 
 {% block content %}
 
+<div class="my-8">
+    <div class="flex md:flex-row flex-col justify-center gap-4">
+        <div class="max-w-sm p-6 bg-gray-100 rounded-lg shadow-sm">
+        <a href="#">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-[--spectra-400]">Animal Types</h5>
+        </a>
+        <p class="mb-3 font-normal text-gray-500">Define and manage animal types to organize your herd more effectively.</p>
+        <a href="{% url 'animals:all_types_view' %}" class="inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
+            <p>All Types</p>
+            <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+    </div>
 
+    <div class="flex md:flex-row flex-col justify-center gap-4">
+        <div class="max-w-sm p-6 bg-gray-100 rounded-lg shadow-sm">
+        <a href="#">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-[--spectra-400]">Animals Breeds</h5>
+        </a>
+        <p class="mb-3 font-normal text-gray-500">Define and manage breeds associated with each animal type to better classify your herd.</p>
+        <a href="{% url 'animals:all_breeds_view' %}" class="inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
+            <p>All Breeds</p>
+            <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+    </div>
+
+</div>
 
 
 {% endblock %}

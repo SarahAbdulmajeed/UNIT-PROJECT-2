@@ -1,0 +1,46 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Edit Animal Type
+{% endblock %}
+
+
+{% block current_page_animals %}
+font-bold underline
+{% endblock %}
+
+
+{% block content %}
+<div class="w-[80%] justify-self-center ">
+    <div>
+        <h2 class="text-3xl pt-8 pb-12 font-semibold text-[--spectra-400]">Edit Animal Type</h2>
+    </div>
+    <div>
+        <form action="{% url 'animals:edit_breed_view' breed.pk%}" method="post">
+            {% csrf_token %}
+            <div class="flex flex-col bg-[--bon-jour-20] rounded-lg border border-1 border-[--spectra-100]">
+                <div
+                    class="rounded-t-lg bg-[--spectra-100] text-[--bon-jour-30] font-semibold h-8 content-center justify-items-center">
+                    <p>Edit Animal Breed</p>
+                </div>
+                <div class="flex flex-col w-full p-4 place-content-around gap-2 pt-8">
+                    <label class="content-center font-bold text-[--spectra-400] after:ml-1 after:text-red-500 after:content-['*']">Breed Name</label>
+                    <input class="border p-2 rounded-lg" type="text" name="name" id="name" minlength="1" maxlength="1024" value="{{breed.name}}" required>
+                </div>
+                <div class="flex flex-col w-full p-4 place-content-around gap-2 pt-4">
+                    <label class="content-center font-bold text-[--spectra-400] after:ml-1 after:text-red-500 after:content-['*']">Breed Type</label>
+                    <select name="animal_type" class="border p-1 rounded-lg" required>
+                        {% for type in types %}
+                        <option value="{{type.id}}" {% if breed.animal_type.id == type.id %}selected{% endif %}>{{type.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>  
+                <div class="rounded-b-lg w-full text-center">
+                    <input class="font-semibold bg-[--spectra-70] hover:bg-[--spectra-100] text-[--spectra-400] my-2 px-10 py-2 rounded-md" type="submit" value="Edit Type" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
