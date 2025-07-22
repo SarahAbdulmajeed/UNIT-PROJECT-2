@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
-from .models import AnimalType, Breed
-from .forms import AnimalTypeForm, BreedForm
+from .models import AnimalType, Breed, Animal
+from .forms import AnimalTypeForm, BreedForm, AnimalForm
+
 
 # Create your views here.
 def animals_view(request:HttpRequest):
@@ -76,3 +77,47 @@ def delete_breed_view(request:HttpRequest, breed_id: int):
     breed = Breed.objects.get(pk = breed_id)
     breed.delete()
     return redirect("animals:all_breeds_view")
+
+
+#=========[ Animal ]=========
+def all_animals_view(request:HttpRequest):
+    animals = Animal.objects.all()
+    return render(request,"animals/all_animals.html",{"animals":animals})
+
+def add_animal_view(request:HttpRequest):
+    if request.method == "POST":
+        form = AnimalForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+    else:
+        form = AnimalForm()
+    return render(request,"animals/add_animal.html",{'form':form})
+
+
+def load_breed(request):
+    type_id = request.GET.get("animal_type")
+    breeds = Breed.objects.filter(animal_type=type_id)
+    return render(request, "animals/breed_options.html", {'breeds': breeds})
+
+
+def edit_animal_view(request:HttpRequest, animal_id: int):
+    types = AnimalType.objects.all()
+    breeds = Breed.objects.all()
+    animal = Animal.objects.get(id = animal_id)
+    #animal_form = AnimalForm(instance=animal)
+    if request.method == "POST":
+        animal_form = BreedForm(request.POST, request.FILES, instance=animal)
+        if animal_form.is_valid():
+            animal_form.save()
+            return redirect('animals:all_animal_view')
+        else:
+            print("invalid form")
+    return render(request,"animals/edit_animal.html", {"animal":animal, "types":types, "breeds":breeds})
+
+def delete_animal_view(request:HttpRequest, animal_id: int):
+    animal = Animal.objects.get(pk = animal_id)
+    animal.delete()
+    return redirect("animals:all_animal_view")
+
