@@ -18,7 +18,7 @@ urlpatterns = [
     #Animal
     path("all/", views.all_animals_view, name="all_animals_view"),
     path("add/", views.add_animal_view, name="add_animal_view"),
-    path("load_breed/",views.load_breed, name="load_breed"),
-    path("<int:breed_id>/edit/", views.edit_animal_view, name="edit_animal_view"),
-    path("<int:breed_id>/delete/", views.delete_animal_view, name="delete_animal_view"),
+    path("load_breed/", views.load_breed, name="load_breed"),
+    path("<int:animal_id>/edit/", views.edit_animal_view, name="edit_animal_view"),
+    path("<int:animal_id>/delete/", views.delete_animal_view, name="delete_animal_view"),
 ] 

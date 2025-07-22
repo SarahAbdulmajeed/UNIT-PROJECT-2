@@ -2,17 +2,20 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from .models import AnimalType, Breed, Animal
 from .forms import AnimalTypeForm, BreedForm, AnimalForm
+from django_tables2 import RequestConfig
+from .tables import TypeTable, BreedTable ,AnimalTable
 
 
 # Create your views here.
 def animals_view(request:HttpRequest):
     return render(request,"animals/animals.html")
 
-
 #=========[ Animal Types ]=========
 def all_types_view(request:HttpRequest):
     types = AnimalType.objects.all()
-    return render(request,"animals/types/all.html",{"types":types})
+    table = TypeTable(types)
+    RequestConfig(request).configure(table)
+    return render(request,"animals/types/all.html",{"table":table})
 
 def add_type_view(request:HttpRequest):
     type_form = AnimalTypeForm()
@@ -46,7 +49,9 @@ def delete_type_view(request:HttpRequest, type_id: int):
 #=========[ Animal Breeds ]=========
 def all_breeds_view(request:HttpRequest):
     breeds = Breed.objects.all()
-    return render(request,"animals/breeds/all.html",{"breeds":breeds})
+    table = BreedTable(breeds)
+    RequestConfig(request).configure(table)
+    return render(request,"animals/breeds/all.html",{"table":table})
 
 def add_breed_view(request:HttpRequest):
     types = AnimalType.objects.all()
@@ -80,9 +85,11 @@ def delete_breed_view(request:HttpRequest, breed_id: int):
 
 
 #=========[ Animal ]=========
-def all_animals_view(request:HttpRequest):
+def all_animals_view(request):
     animals = Animal.objects.all()
-    return render(request,"animals/all_animals.html",{"animals":animals})
+    table = AnimalTable(animals)
+    RequestConfig(request).configure(table)
+    return render(request, "animals/animal/all_animals.html", {"table": table})
 
 def add_animal_view(request:HttpRequest):
     if request.method == "POST":
@@ -93,31 +100,28 @@ def add_animal_view(request:HttpRequest):
             print(form.errors)
     else:
         form = AnimalForm()
-    return render(request,"animals/add_animal.html",{'form':form})
+    return render(request,"animals/animal/add_animal.html",{'form':form})
 
-
-def load_breed(request):
+def load_breed(request:HttpRequest):
     type_id = request.GET.get("animal_type")
     breeds = Breed.objects.filter(animal_type=type_id)
-    return render(request, "animals/breed_options.html", {'breeds': breeds})
-
+    return render(request, "animals/animal/breed_options.html", {'breeds': breeds})
 
 def edit_animal_view(request:HttpRequest, animal_id: int):
-    types = AnimalType.objects.all()
-    breeds = Breed.objects.all()
-    animal = Animal.objects.get(id = animal_id)
-    #animal_form = AnimalForm(instance=animal)
+    animal = Animal.objects.get(pk=animal_id)
     if request.method == "POST":
-        animal_form = BreedForm(request.POST, request.FILES, instance=animal)
-        if animal_form.is_valid():
-            animal_form.save()
-            return redirect('animals:all_animal_view')
+        form = AnimalForm(request.POST, request.FILES, instance=animal)
+        if form.is_valid():
+            form.save()
+            return redirect("animals:all_animals_view")  # غيريها للمكان اللي ترجعين له
         else:
-            print("invalid form")
-    return render(request,"animals/edit_animal.html", {"animal":animal, "types":types, "breeds":breeds})
+            print(form.errors)
+    else:
+        form = AnimalForm(instance=animal)
+    return render(request,"animals/animal/edit_animal.html", {"form":form, "animal":animal})
 
 def delete_animal_view(request:HttpRequest, animal_id: int):
     animal = Animal.objects.get(pk = animal_id)
     animal.delete()
-    return redirect("animals:all_animal_view")
+    return redirect("animals:all_animals_view")
 

@@ -11,39 +11,21 @@ font-bold underline
 
 
 {% block content %}
+
 <div class="w-[80%] justify-self-center ">
     <div>
         <h2 class="text-3xl pt-8 pb-12 font-semibold text-[--spectra-400]">Animals Types</h2>
     </div>
+
     <div class="flex flex-col">
         <div class="rounded-b-lg w-24 text-center text-right font-semibold bg-[--spectra-100] hover:bg-[--spectra-70] text-[--bon-jour-20] my-2 px-4 py-2 rounded-md self-end">
             <a href="{% url 'animals:add_type_view' %}">Add Type</a>
         </div>
 
-        <div class="">
-            <div class="overflow-auto rounded-sm">
-                <table class="w-full">
-                    <thead class="bg-[--spectra-40] border-b-2 border-[--spectra-100] text-[--spectra-100]">
-                        <tr>
-                            <th class="w-96 p-3 text-sm font-bold traking-wide text-left">Type</th>
-                            <th class="w-36 p-3 text-sm font-bold traking-wide text-left">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-[--bon-jour-30]">
-                        {% for type in types %}
-                        <tr cla class="p-3 text-sm text-gray-700 bg-[--bon-jour-20] hover:bg-[--bon-jour-30]">
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap hover:font-semibold"><a>{{ type.name }}</a></td>
-                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap flex flex-row gap-2">
-                                <a class="py-1 px-1.5 font-medium uppercase tracking-wide text-amber-800 bg-amber-400 rounded-lg bg-opacity-50" href="{% url 'animals:edit_type_view' type.pk%}">Edit</a>
-                                <a class="py-1 px-1.5 font-medium uppercase tracking-wide text-red-800 bg-red-400 rounded-lg bg-opacity-50"href="{% url 'animals:delete_type_view' type.pk%}">Delete</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+        {% load render_table from django_tables2 %}
+        {% render_table table %}
 
+    </div>
 </div>
+
 {% endblock %}

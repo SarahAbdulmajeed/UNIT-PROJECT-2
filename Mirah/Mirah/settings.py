@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'animals',
     'crispy_forms',
     'crispy_tailwind',
+    'django_tables2'
 ]
 
 

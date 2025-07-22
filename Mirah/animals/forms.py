@@ -2,6 +2,8 @@ from django import forms
 from .models import AnimalType, Breed, Animal
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Row, Column
+from django.urls import reverse_lazy
+
 
 
 class AnimalTypeForm(forms.ModelForm):
@@ -32,7 +34,7 @@ class AnimalForm(forms.ModelForm):
         widgets = {
             'birth_date': forms.DateInput(attrs={'type': 'date'}),
             'animal_type': forms.Select(attrs={
-                'hx-get': '/animals/load_breed/',
+                'hx-get': reverse_lazy('animals:load_breed'),
                 'hx-target': '#id_breed',
             })
         }
