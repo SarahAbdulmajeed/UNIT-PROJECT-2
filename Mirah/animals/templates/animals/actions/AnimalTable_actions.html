@@ -1,2 +1,5 @@
-<a href="{% url 'animals:edit_animal_view' record.id %}" class="text-blue-600 hover:underline">Edit</a>
-<a href="{% url 'animals:delete_animal_view' record.id %}" class="text-red-600 hover:underline">Delete</a>
+<div class="flex md:flex-row flex-col w-full">
+    <a href="{% url 'animals:detail_animal_view' record.id %}" class="text-yellow-600 hover:underline">Details</a>
+    <a href="{% url 'animals:edit_animal_view' record.id %}" class="text-blue-600 hover:underline">Edit</a>
+    <a href="{% url 'animals:delete_animal_view' record.id %}" class="text-red-600 hover:underline">Delete</a>
+</div>

@@ -1,9 +1,9 @@
 from django import forms
-from .models import AnimalType, Breed, Animal
+from .models import AnimalType, Breed, Animal, WeightRecord
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Row, Column
 from django.urls import reverse_lazy
-
+import datetime
 
 
 class AnimalTypeForm(forms.ModelForm):
@@ -53,3 +53,30 @@ class AnimalForm(forms.ModelForm):
             self.fields["breed"].queryset = Breed.objects.filter(animal_type=self.instance.animal_type)
         else:
             self.fields["breed"].queryset = Breed.objects.none()
+
+class WeightRecordForm(forms.ModelForm):
+    class Meta:
+        model = WeightRecord
+        fields = [
+            'weight_kg',
+            'date',
+            'image',
+            'notes',
+            ]
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+    def clean_date(self):
+        date = self.cleaned_data["date"]
+        if date > datetime.date.today():
+            raise forms.ValidationError("Weight date cannot be in the future.")
+        return date
+
+    def clean_weight_kg(self):
+        weight = self.cleaned_data["weight_kg"]
+        if weight <= 0:
+            raise forms.ValidationError("Weight must be greater than zero.")
+        return weight
+
+

@@ -1,0 +1,110 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Animal Details
+{% endblock %}
+
+
+{% block current_page_animals %}
+font-bold underline
+{% endblock %}
+
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"></script>
+<div class="w-[80%] justify-self-center ">
+    <div>
+        <h2 class="text-3xl pt-8 pb-12 font-semibold text-[--spectra-400]">{{animal.name}} - Information </h2>
+    </div>
+    <div class="w-full justify-self-center">
+        
+        <details open>
+            <summary class="flex flex-row items-center gap-2  text-[--bon-jour-30] font-semibold h-8 select-none bg-[--spectra-400] rounded-t-lg content-center justify-center">Animal Information</summary>
+            <div class="flex flex-col bg-[--bon-jour-20] rounded-b-lg  p-4">
+                <!-- Animal Information -->
+                <div class="flex flex-col">
+                    
+                    <div class="flex md:flex-row flex-col gap-4">
+                        <div class="row-span-2 w-96 bg-[url({{animal.image.url}})] h-80 w-48 bg-cover bg-center rounded-md border border-gray-200 self-center"></div>
+                        <div class="row-span-2 col-span-2 flex flex-col w-96">
+                            <!-- Name -->
+                            <div class="flex flex-row p-2">
+                                <p class="w-[25%] font-bold text-[--spectra-400] ">Name</p>
+                                <p class="w-[75%]">{{ animal.name }}</p>    
+                            </div>
+                            <!-- Gender -->
+                            <div class="flex flex-row p-2">
+                                <p class="w-[25%] font-bold text-[--spectra-400] ">Gender</p>
+                                <p class="w-[75%]">{{ animal.get_gender_display }}</p>    
+                            </div>
+                            <!-- Birthdate -->
+                            <div class="flex flex-row p-2">
+                                <p class="w-[25%] font-bold text-[--spectra-400] ">Birthdate</p>
+                                <p class="w-[75%]">{{ animal.birth_date }}</p>    
+                            </div>
+                            <!-- Type -->
+                            <div class="flex flex-row p-2">
+                                <p class="w-[25%] font-bold text-[--spectra-400] ">Type</p>
+                                <p class="w-[75%]">{{ animal.animal_type }}</p>    
+                            </div>
+                            <!-- Breed -->
+                            <div class="flex flex-row p-2">
+                                <p class="w-[25%] font-bold text-[--spectra-400] ">Breed</p>
+                                <p class="w-[75%]">{{ animal.breed }}</p>    
+                            </div>
+                            <!-- Status -->
+                            <div class="flex flex-row p-2">
+                                <p class="w-[25%] font-bold text-[--spectra-400] ">Status</p>
+                                <p class="w-[75%]">{{ animal.status }}</p>    
+                            </div>
+                            <!-- Note -->
+                            <div class="flex flex-row p-2">
+                                <p class="w-[25%] font-bold text-[--spectra-400] ">Notes</p>
+                                <p class="w-[75%]">{{ animal.notes }}</p>    
+                            </div>
+                            <!-- Added Date -->
+                            <div class="flex flex-row p-2">
+                                <p class="w-[25%] font-bold text-[--spectra-400] ">Added date</p>
+                                <p class="w-[75%]">{{ animal.created_at }}</p>    
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="rounded-b-lg w-full text-end">
+            <button class="font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-30] my-2 px-10 py-2 rounded-md">Edit Information<button>
+        </div>
+
+        <br>
+
+        <details open>
+            <summary class="flex flex-row items-center gap-2  text-[--bon-jour-30] font-semibold h-8 select-none bg-[--spectra-400] rounded-t-lg content-center justify-center">Weight Records</summary>
+            <div class="flex flex-col bg-[--bon-jour-20] rounded-b-lg  p-4">
+
+                <!-- Weight Records -->
+                <div class="flex flex-col">
+                    
+                    <div class="flex md:flex-row flex-col gap-4">
+                        {% load render_table from django_tables2 %}
+                        {% render_table weightRecordTable %}
+                    </div>
+
+                </div>
+
+            </div>
+        </details>
+        
+        <div class="rounded-b-lg w-full text-end">
+            <a href="{% url 'animals:add_weight_record_view' animal.pk%}"><button class="font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-30] my-2 px-10 py-2 rounded-md">Add Weight Record<button></button></a>
+        </div>
+
+        
+
+    </div>
+</div>
+{% endblock %}

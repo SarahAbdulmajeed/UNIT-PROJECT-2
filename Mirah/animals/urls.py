@@ -21,4 +21,8 @@ urlpatterns = [
     path("load_breed/", views.load_breed, name="load_breed"),
     path("<int:animal_id>/edit/", views.edit_animal_view, name="edit_animal_view"),
     path("<int:animal_id>/delete/", views.delete_animal_view, name="delete_animal_view"),
+    path("<int:animal_id>/details/", views.detail_animal_view, name="detail_animal_view"),
+    #Weight Record
+    path("weights/<int:animal_id>/add/", views.add_weight_record_view, name="add_weight_record_view"),
+    path("weights/delete/<int:weight_id>", views.delete_weight_record_view, name="delete_weight_record_view"),
 ] 

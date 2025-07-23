@@ -12,6 +12,14 @@ class Breed(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.name
+    
+class WeightRecord(models.Model):
+    animal = models.ForeignKey("Animal", on_delete=models.CASCADE)
+    weight_kg = models.DecimalField(max_digits=5, decimal_places=2)
+    date = models.DateField()
+    image = models.ImageField(upload_to="weights/", blank=True, null=True)
+    notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class Animal(models.Model):
     class GenderChoices(models.TextChoices):

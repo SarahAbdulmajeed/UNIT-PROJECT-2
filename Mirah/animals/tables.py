@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import AnimalType, Breed, Animal
+from .models import AnimalType, Breed, Animal, WeightRecord
 
 
 class TypeTable(tables.Table):
@@ -22,3 +22,10 @@ class AnimalTable(tables.Table):
         model = Animal
         template_name = "django_tables2/table.html"
         fields = ("name", "animal_type", "breed", "status", "birth_date")
+
+class WeightRecordTable(tables.Table):
+    actions = tables.TemplateColumn(template_name='animals/actions/WeightRecordTable_actions.html', orderable=False)
+    class Meta:
+        model = WeightRecord
+        template_name = "django_tables2/table.html"
+        fields = ("weight_kg","date","image","notes","created_at")
