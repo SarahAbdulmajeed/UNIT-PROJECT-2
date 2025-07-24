@@ -1,16 +1,18 @@
 {% load django_tables2 %}
-<div class="overflow-x-auto w-full">
+
+<!-- Table for large screens -->
+<div class="hidden md:block overflow-x-auto w-full">
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-100">
             <tr>
             {% for column in table.columns %}
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                     {{ column.header }}
                 </th>
             {% endfor %}
             </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-white divide-y divide-gray-200 text-center">
             {% for row in table.rows %}
                 <tr class="hover:bg-gray-50">
                     {% for column, cell in row.items %}
@@ -22,4 +24,18 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
+
+<!-- Card style for small screens -->
+<div class="md:hidden space-y-4">
+    {% for row in table.rows %}
+        <div class="bg-white rounded-lg p-4 divide-y divide-gray-100 shadow border border-gray-50">
+            {% for column, cell in row.items %}
+                <div class="py-2">
+                    <div class="text-xs text-[--spectra-400] font-bold uppercase">{{ column.header }}</div>
+                    <div class="text-sm mt-1 text-gray-600">{{ cell }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
 </div>

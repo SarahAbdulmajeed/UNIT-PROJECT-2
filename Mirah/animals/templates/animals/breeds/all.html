@@ -4,25 +4,24 @@
 Animals Types
 {% endblock %}
 
-
 {% block current_page_animals %}
 font-bold underline
 {% endblock %}
 
-
 {% block content %}
 <div class="w-[80%] justify-self-center ">
-    <div>
-        <h2 class="text-3xl pt-8 pb-12 font-semibold text-[--spectra-400]">Animals Types</h2>
+    <div class="flex flex-row pt-8 pb-12 gap-4 text-[--spectra-400]">
+        <span class="material-symbols-outlined place-content-center"><a href="{% url 'animals:animals_view' %}">arrow_back</a></span>
+        <h2 class="text-3xl font-semibold">Animal Breeds</h2>
     </div>
+
     <div class="flex flex-col">
-        <div class="rounded-b-lg w-28 text-center font-semibold bg-[--spectra-100] hover:bg-[--spectra-70] text-[--bon-jour-20] my-2 px-4 py-2 rounded-md self-end">
+        <div class="rounded-b-lg w-26 text-center text-right font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-20] my-2 px-4 py-2 rounded-md self-end transition duration-300 ease-in-out">
             <a href="{% url 'animals:add_breed_view' %}">Add Breed</a>
         </div>
         
         {% load render_table from django_tables2 %}
         {% render_table table %}
     </div>
-
 </div>
 {% endblock %}

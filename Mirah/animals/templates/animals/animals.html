@@ -11,49 +11,62 @@ font-bold underline
 
 {% block content %}
 
-<div class="my-8 flex lg:flex-row flex-col gap-4 justify-center items-center">
-    <div class="w-96 h-[25vh] flex lg:flex-row flex-col justify-center gap-4">
-        <div class="p-6 bg-gray-100 rounded-lg shadow-sm">
+<div class="my-8 flex flex-wrap gap-4 justify-center justify-self-center">
+
+    <div class="w-96 flex lg:flex-row flex-col justify-center gap-4">
+        <div class="p-6 h-[25vh] bg-gray-100 rounded-lg shadow-sm">
             <a href="#">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-[--spectra-400]">Animal Types</h5>
             </a>
-            <p class="mb-3 font-normal text-gray-500">Define and manage animal types to organize your herd more
+            <p class="h-24 mb-3 font-normal text-gray-500">Define and manage animal types to organize your herd more
                 effectively.</p>
-            <a href="{% url 'animals:all_types_view' %}"
-                class="inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
+            <a href="{% url 'animals:all_types_view' %}" class="float-end inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
                 <p>All Types</p>
                 <span class="material-symbols-outlined">arrow_forward</span>
             </a>
         </div>
     </div>
     
-    <div class="w-96 h-[25vh] flex md:flex-row flex-col justify-center gap-4">
-        <div class="p-6 bg-gray-100 rounded-lg shadow-sm">
+    <div class="w-96 flex md:flex-row flex-col justify-center gap-4">
+        <div class="p-6 h-[25vh] bg-gray-100 rounded-lg shadow-sm">
                 <a href="#">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-[--spectra-400]">Animal Breeds</h5>
                 </a>
-                <p class="mb-3 font-normal text-gray-500">Define and manage breeds associated with each animal type to
+                <p class="h-24 mb-3 font-normal text-gray-500">Define and manage breeds associated with each animal type to
                     better classify your herd.</p>
-                <a href="{% url 'animals:all_breeds_view' %}"
-                    class="inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
+                <a href="{% url 'animals:all_breeds_view' %}" class="float-end  inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
                     <p>All Breeds</p>
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
         </div>
     </div>
     
-    <div class="w-96 h-[25vh] flex md:flex-row flex-col justify-center gap-4">
-        <div class="p-6 bg-gray-100 rounded-lg shadow-sm">
+    <div class="w-96 flex md:flex-row flex-col justify-center gap-4">
+        <div class="p-6 h-[25vh] bg-gray-100 rounded-lg shadow-sm">
             <a href="#">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-[--spectra-400]">Animal</h5>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-[--spectra-400]">Animals</h5>
             </a>
-            <p class="mb-3 font-normal text-gray-500">Manage individual animals in your herd, including adding, editing, viewing, and removing animals with their full details.</p>
-            <a href="{% url 'animals:all_animals_view' %}" class="inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
+            <p class="h-24 mb-3 font-normal text-gray-500">Manage individual animals in your herd, including adding, editing, viewing, and removing animals with their full details.</p>
+            <a href="{% url 'animals:all_animals_view' %}" class="float-end inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
                 <p>All Animals</p>
                 <span class="material-symbols-outlined">arrow_forward</span>
             </a>
         </div>
     </div>
+
+    <div class="w-96 flex md:flex-row flex-col justify-center gap-4">
+        <div class="p-6 h-[25vh] bg-gray-100 rounded-lg shadow-sm">
+            <a href="#">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-[--spectra-400]">Ideal Weight</h5>
+            </a>
+            <p class="h-24 mb-3 font-normal text-gray-500">Define ideal weight ranges by breed, age, and gender to track and evaluate healthy growth patterns.</p>
+            <a href="{% url 'animals:all_ideal_weight_view' %}" class="float-end inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
+                <p>All Ideal Weight</p>
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+        </div>
+    </div>
+
 
 </div>
 

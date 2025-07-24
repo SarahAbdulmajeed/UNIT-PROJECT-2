@@ -1,7 +1,7 @@
 from django.db import models
 
 class AnimalType(models.Model):
-    name = models.CharField(max_length=1024, unique=True)
+    name = models.CharField(max_length=1024, unique=True) #unique so the name cannot be duplicate
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.name
@@ -20,6 +20,19 @@ class WeightRecord(models.Model):
     image = models.ImageField(upload_to="weights/", blank=True, null=True)
     notes = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class IdealWeight(models.Model):
+    class GenderChoices(models.TextChoices):
+        MALE = "M", "Male"
+        FEMALE = "F", "Female"
+
+    breed = models.ForeignKey('Breed', on_delete=models.PROTECT)
+    age_from_days = models.PositiveIntegerField()
+    age_to_days = models.PositiveIntegerField()
+    ideal_min_weight = models.DecimalField(max_digits=5, decimal_places=2)
+    ideal_max_weight = models.DecimalField(max_digits=5, decimal_places=2)
+    gender = models.CharField(max_length=1, choices=GenderChoices.choices)
+
 
 class Animal(models.Model):
     class GenderChoices(models.TextChoices):

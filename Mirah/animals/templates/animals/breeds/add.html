@@ -1,7 +1,8 @@
 {% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}
-Add Animal Breed
+Add Breed
 {% endblock %}
 
 
@@ -11,34 +12,26 @@ font-bold underline
 
 
 {% block content %}
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"></script>
 <div class="w-[80%] justify-self-center ">
-    <div>
-        <h2 class="text-3xl pt-8 pb-12 font-semibold text-[--spectra-400]">Add Animal Breed</h2>
+    <div class="flex flex-row pt-8 pb-12 gap-4 text-[--spectra-400]">
+        <span class="material-symbols-outlined place-content-center"><a href="{% url 'animals:all_breeds_view' %}">arrow_back</a></span>
+        <h2 class="text-3xl font-semibold">Add Breed</h2>
     </div>
     <div class="w-full justify-self-center">
-        <form action="{% url 'animals:add_breed_view'%}" method="post">
+        <div class="rounded-t-lg bg-[--spectra-400] text-[--bon-jour-30] font-semibold h-8 content-center justify-items-center">
+            <p>Add Breed</p>
+        </div>
+        <form action="{% url 'animals:add_breed_view'%}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="flex flex-col bg-[--bon-jour-20] rounded-lg pb-8">
-                <div class="rounded-t-lg bg-[--spectra-400] text-[--bon-jour-30] font-semibold h-8 content-center justify-items-center">
-                    <p>Create Animal Breed</p>
-                </div>
-                <div class="flex flex-col w-full p-4 place-content-around gap-2 pt-8">
-                    <label class="content-center font-bold text-[--spectra-400] after:ml-1 after:text-red-500 after:content-['*']">Breed Name</label>
-                    <input class="border p-2 rounded-lg" type="text" name="name" id="name" minlength="1" maxlength="1024" required>
-                </div>
-                <div class="flex flex-col w-full p-4 place-content-around gap-2 pt-4">
-                    <label class="content-center font-bold text-[--spectra-400] after:ml-1 after:text-red-500 after:content-['*']">Breed Type</label>
-                    <select name="animal_type" class="border p-1 rounded-lg" required>
-                        <option value="" selected>-- Choose an animal type --</option>
-                        {% for type in types %}
-                        <option value="{{type.id}}">{{type.name}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
+            <div class="flex flex-col bg-[--bon-jour-20] rounded-b-lg  p-4  ">
+                {{form|crispy}}
             </div>
+
             <div class="rounded-b-lg w-full text-end">
                 <input class="font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-30] my-2 px-10 py-2 rounded-md" type="submit" value="Add Breed" />
             </div>
+
         </form>
     </div>
 </div>

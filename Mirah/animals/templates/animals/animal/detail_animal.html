@@ -10,12 +10,12 @@ Animal Details
 font-bold underline
 {% endblock %}
 
-
 {% block content %}
 <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"></script>
 <div class="w-[80%] justify-self-center ">
-    <div>
-        <h2 class="text-3xl pt-8 pb-12 font-semibold text-[--spectra-400]">{{animal.name}} - Information </h2>
+    <div class="flex flex-row pt-8 pb-12 gap-4 text-[--spectra-400]">
+        <span class="material-symbols-outlined place-content-center"><a href="{% url 'animals:all_animals_view' %}">arrow_back</a></span>
+        <h2 class="text-3xl font-semibold">{{animal.name}} - Details</h2>
     </div>
     <div class="w-full justify-self-center">
         
@@ -43,6 +43,14 @@ font-bold underline
                                 <p class="w-[25%] font-bold text-[--spectra-400] ">Birthdate</p>
                                 <p class="w-[75%]">{{ animal.birth_date }}</p>    
                             </div>
+                            <!-- Birthdate -->
+                            <div class="flex flex-row p-2 gap-1">
+                                <p class="w-[25%] font-bold text-[--spectra-400] ">Age</p>
+                                {% for key, value in age_format.items %}
+                                <span>{{ value }} {{ key }}</span> 
+                                {% endfor %}   
+                            </div>
+
                             <!-- Type -->
                             <div class="flex flex-row p-2">
                                 <p class="w-[25%] font-bold text-[--spectra-400] ">Type</p>
@@ -77,9 +85,14 @@ font-bold underline
         </details>
 
         <div class="rounded-b-lg w-full text-end">
-            <button class="font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-30] my-2 px-10 py-2 rounded-md">Edit Information<button>
+            <a href="{% url 'animals:edit_animal_view' animal.pk%}"><button class="font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-30] my-2 px-10 py-2 rounded-md">Edit Information<button></a>
         </div>
 
+        Last Weight:  {{ last_weight_record }}
+        <br>
+        Age in days: {{ age_in_days }}
+        <br>
+        Status: {{ weight_status  }}
         <br>
 
         <details open>

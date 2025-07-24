@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-Add Animal
+Add Weight
 {% endblock %}
 
 
@@ -14,14 +14,15 @@ font-bold underline
 {% block content %}
 <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"></script>
 <div class="w-[80%] justify-self-center ">
-    <div>
-        <h2 class="text-3xl pt-8 pb-12 font-semibold text-[--spectra-400]">Add Weight - {{animal.name}}</h2>
+    <div class="flex flex-row pt-8 pb-12 gap-4 text-[--spectra-400]">
+        <span class="material-symbols-outlined place-content-center"><a href="{% url 'animals:detail_animal_view' animal.pk %}">arrow_back</a></span>
+        <h2 class="text-3xl font-semibold">Add Weight - {{animal.name}}</h2>
     </div>
     <div class="w-full justify-self-center">
         <div class="rounded-t-lg bg-[--spectra-400] text-[--bon-jour-30] font-semibold h-8 content-center justify-items-center">
             <p>Add Animal</p>
         </div>
-        <form action="{% url 'animals:add_weight_view' animal.pk%}" method="post">
+        <form action="{% url 'animals:add_weight_record_view' animal.pk%}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="flex flex-col bg-[--bon-jour-20] rounded-b-lg  p-4  ">
                 {{form|crispy}}

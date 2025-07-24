@@ -25,4 +25,10 @@ urlpatterns = [
     #Weight Record
     path("weights/<int:animal_id>/add/", views.add_weight_record_view, name="add_weight_record_view"),
     path("weights/delete/<int:weight_id>", views.delete_weight_record_view, name="delete_weight_record_view"),
+    #Ideal Weight 
+    path("weights/ideal/all/", views.all_ideal_weight_view, name="all_ideal_weight_view"),
+    path("weights/ideal/add/", views.add_ideal_weight_view, name="add_ideal_weight_view"),
+    path("weights/ideal/<int:ideal_weight_id>/edit/", views.edit_ideal_weight_view, name="edit_ideal_weight_view"),
+    path("weights/ideal/<int:ideal_weight_id>/delete/", views.delete_ideal_weight_view, name="delete_ideal_weight_view"),
+
 ] 

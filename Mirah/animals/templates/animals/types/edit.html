@@ -1,4 +1,5 @@
 {% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}
 Edit Animal Type
@@ -12,27 +13,27 @@ font-bold underline
 
 {% block content %}
 <div class="w-[80%] justify-self-center ">
-    <div>
-        <h2 class="text-3xl pt-8 pb-12 font-semibold text-[--spectra-400]">Edit Animal Type</h2>
+    <div class="flex flex-row pt-8 pb-12 gap-4 text-[--spectra-400]">
+        <span class="material-symbols-outlined place-content-center"><a href="{% url 'animals:all_types_view' %}">arrow_back</a></span>
+        <h2 class="text-3xl font-semibold">Edit Type</h2>
     </div>
-    <div>
-        <form action="{% url 'animals:edit_type_view' type.pk%}" method="post">
-            {% csrf_token %}
-            <div class="flex flex-col bg-[--bon-jour-20] rounded-lg border border-1 border-[--spectra-100]">
-                <div
-                    class="rounded-t-lg bg-[--spectra-100] text-[--bon-jour-30] font-semibold h-8 content-center justify-items-center">
-                    <p>Edit Animal Type</p>
-                </div>
-                <div class="flex sm:flex-row flex-col w-full py-2 place-content-around gap-2">
-                    <label class="sm:w-[25%] sm:text-right text-center content-center">Type name</label>
-                    <input class="sm:w-[70%] border p-2" value="{{type.name}}" type="text" name="name" id="name" minlength="1" maxlength="1024" required>
-                </div>
-                <div class="rounded-b-lg w-full text-center">
-                    <input class="font-semibold bg-[--spectra-70] hover:bg-[--spectra-100] text-[--spectra-400] my-2 px-10 py-2 rounded-md" type="submit" value="Edit Type" />
-                </div>
-            </div>
-        </form>
 
+    <div class="w-full justify-self-center">
+        <div class="rounded-t-lg bg-[--spectra-400] text-[--bon-jour-30] font-semibold h-8 content-center justify-items-center">
+            <p>Edit Type</p>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"></script>
+        <form action="{% url 'animals:edit_type_view' type.pk%}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="flex flex-col bg-[--bon-jour-20] rounded-b-lg  p-4  ">
+                {{form|crispy}}
+            </div>
+
+            <div class="rounded-b-lg w-full text-end">
+                <input class="font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-30] my-2 px-10 py-2 rounded-md" type="submit" value="Edit Type" />
+            </div>
+
+        </form>
     </div>
 </div>
 {% endblock %}
