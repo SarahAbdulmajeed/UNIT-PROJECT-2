@@ -3,9 +3,12 @@ from django.http import HttpRequest, HttpResponse
 from .models import AnimalType, Breed, Animal, WeightRecord, IdealWeight
 from .forms import AnimalTypeForm, BreedForm, AnimalForm, WeightRecordForm, IdealWeightForm
 from .tables import TypeTable, BreedTable ,AnimalTable, WeightRecordTable, IdealWeightTable
+from .filters import AnimalFilter
 from django_tables2 import RequestConfig
+from django_filters.views import FilterView
 from datetime import date
 from dateutil.relativedelta import relativedelta
+
 
 
 # Create your views here.
@@ -16,7 +19,7 @@ def animals_view(request:HttpRequest):
 def all_types_view(request:HttpRequest):
     types = AnimalType.objects.all()
     table = TypeTable(types)
-    RequestConfig(request).configure(table)
+    RequestConfig(request,paginate={"per_page": 10}).configure(table)
     return render(request,"animals/types/all.html",{"table":table})
 
 def add_type_view(request:HttpRequest):
@@ -55,7 +58,7 @@ def delete_type_view(request:HttpRequest, type_id: int):
 def all_breeds_view(request:HttpRequest):
     breeds = Breed.objects.all()
     table = BreedTable(breeds)
-    RequestConfig(request).configure(table)
+    RequestConfig(request,paginate={"per_page": 10}).configure(table)
     return render(request,"animals/breeds/all.html",{"table":table})
 
 def add_breed_view(request:HttpRequest):
@@ -91,9 +94,14 @@ def delete_breed_view(request:HttpRequest, breed_id: int):
 #=========[ Animal ]=========
 def all_animals_view(request:HttpRequest):
     animals = Animal.objects.all()
-    table = AnimalTable(animals)
-    RequestConfig(request).configure(table)
-    return render(request, "animals/animal/all_animals.html", {"table": table})
+    filterset = AnimalFilter(request.GET, queryset=animals)
+    table = AnimalTable(filterset.qs)
+    RequestConfig(request, paginate={"per_page": 10}).configure(table)
+
+    return render(request, "animals/animal/all_animals.html", {
+        "table": table,
+        "filter": filterset
+    })
 
 def add_animal_view(request:HttpRequest):
     if request.method == "POST":
@@ -162,7 +170,7 @@ def detail_animal_view(request:HttpRequest, animal_id: int):
     else:
         print("no weight records")
 
-    RequestConfig(request).configure(weight_record_table)
+    RequestConfig(request,paginate={"per_page": 3}).configure(weight_record_table)
     return render(request,"animals/animal/detail_animal.html", {"animal":animal, "weightRecordTable":weight_record_table,"age_format":age_format, "last_weight_record":last_weight_record, "age_in_days":age_in_days, "weight_status":weight_status})
 
 #=========[ Weight Record ]=========
@@ -206,11 +214,19 @@ def add_ideal_weight_view(request:HttpRequest):
     return render(request, "animals/ideal_weight/add.html",{"form":form})
 
 def edit_ideal_weight_view(request:HttpRequest, ideal_weight_id:int):
-    
-    return render(request, "animals/ideal_weight/edit.html")
+    ideal_weight_range = IdealWeight.objects.get(pk=ideal_weight_id)
+    if request.method == "POST":
+        form = IdealWeightForm(request.POST, instance=ideal_weight_range)
+        if form.is_valid():
+            form.save()
+            return redirect('animals:all_ideal_weight_view')
+        else:
+            print(form.errors)
+    else:
+        form = IdealWeightForm(instance=ideal_weight_range)
+    return render(request,"animals/ideal_weight/edit.html", {"form":form, "ideal_weight_range":ideal_weight_range})
 
 def delete_ideal_weight_view(request:HttpRequest, ideal_weight_id:int):
     ideal_weight = IdealWeight.objects.get(pk=ideal_weight_id)
     ideal_weight.delete()
     return redirect("animals:all_ideal_weight_view")
-

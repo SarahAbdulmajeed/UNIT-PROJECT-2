@@ -14,8 +14,9 @@ font-bold underline
 {% block content %}
 <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"></script>
 <div class="w-[80%] justify-self-center ">
-    <div>
-        <h2 class="text-3xl pt-8 pb-12 font-semibold text-[--spectra-400]">Add Ideal Weight</h2>
+    <div class="flex flex-row pt-8 pb-12 gap-4 text-[--spectra-400]">
+        <span class="material-symbols-outlined place-content-center"><a href="{% url 'animals:all_ideal_weight_view' %}">arrow_back</a></span>
+        <h2 class="text-3xl font-semibold">Add Ideal Weight</h2>
     </div>
     <div class="w-full justify-self-center">
         <div class="rounded-t-lg bg-[--spectra-400] text-[--bon-jour-30] font-semibold h-8 content-center justify-items-center">

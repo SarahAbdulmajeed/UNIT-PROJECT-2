@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,200,0,-25" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
   <style>
     :root { 
         /*https://geenes.app/*/
@@ -34,6 +35,59 @@
         --bon-jour-20: #edeaea; /* 20 */
         --bon-jour-10: #f7f6f6; /* 10 */
     }
+  </style>
+  <style>
+.custom-django-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.custom-django-table thead {
+    background-color: #f3f4f6; /* Tailwind bg-gray-100 */
+    color: #374151; /* text-gray-700 */
+}
+
+.custom-django-table tbody tr:hover {
+    background-color: #f9fafb; /* Tailwind hover:bg-gray-50 */
+}
+
+.custom-django-table th,
+.custom-django-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb; /* Tailwind border-gray-200 */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.pagination .page-link,
+.pagination .current {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    border-radius: 0.375rem;
+    background-color: white;
+    color: #374151; /* text-gray-700 */
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.pagination .page-link:hover {
+    background-color: #f3f4f6; /* hover:bg-gray-100 */
+}
+
+.pagination .current {
+    background-color: #2563eb; /* bg-blue-600 */
+    color: white;
+    font-weight: bold;
+}
+
   </style>
 </head>
 

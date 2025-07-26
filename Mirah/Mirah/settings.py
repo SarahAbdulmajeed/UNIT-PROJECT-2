@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'animals',
     'crispy_forms',
     'crispy_tailwind',
-    'django_tables2'
+    'django_tables2',
+    'django_filters'
 ]
 
 
@@ -140,6 +141,7 @@ IMAGEKIT_URL_ENDPOINT = os.getenv("IMAGEKIT_URL_ENDPOINT")
 MEDIA_URL =  '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
+CRISPY_ALLOWED_TEMPLATE_PACKS = ["tailwind"]
+
 
