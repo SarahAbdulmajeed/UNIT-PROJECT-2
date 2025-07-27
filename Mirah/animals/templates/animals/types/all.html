@@ -16,9 +16,52 @@ font-bold underline
     </div>
 
     <div class="flex flex-col">
-        <div class="rounded-b-lg w-24 text-center text-right font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-20] my-2 px-4 py-2 rounded-md self-end transition duration-300 ease-in-out">
-            <a href="{% url 'animals:add_type_view' %}">Add Type</a>
-        </div>
+       
+        <div class="flex flex-row justify-end gap-2 items-center ">
+                <div class="justify-self-center">
+                    <!-- Modal toggle -->
+                    <button data-modal-target="default-modal" data-modal-toggle="default-modal" type="button" class="text-[--spectra-400] border border-[--spectra-400] hover:bg-[--spectra-400] hover:text-[--bon-jour-20] focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                            <path d="M14 2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2.172a2 2 0 0 0 .586 1.414l2.828 2.828A2 2 0 0 1 6 9.828v4.363a.5.5 0 0 0 .724.447l2.17-1.085A2 2 0 0 0 10 11.763V9.829a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 0 14 4.172V2Z" />
+                        </svg>
+                        <span class="sr-only">Icon description</span>
+                    </button>
+                </div>
+            <div class="rounded-b-lg w-26 text-center text-right font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-20] my-2 px-4 py-2 rounded-md self-end transition duration-300 ease-in-out">
+                <a href="{% url 'animals:add_type_view' %}">Add Type</a>
+            </div>
+       </div>
+
+    
+        <form method="get" class="mb-4 flex gap-2 flex-wrap">
+            <!-- Main modal -->
+            <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative p-4 w-full max-w-2xl max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow-sm">
+                        <!-- Modal header -->
+                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t  border-gray-200">
+                            <h3 class="text-xl font-semibold text-[--spectra-400] ">Types Filter</h3>
+                            <button type="button" class="text-gray-400 bg-transparent hover:bg-[--spectra-400] hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="default-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="p-4 md:p-5 space-y-4">
+                            {% load crispy_forms_tags %}
+                            {{ filter.form|crispy }}
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
+                            <button type="submit" class="bg-[--spectra-400] text-white px-4 py-2 rounded hover:bg-[--spectra-600]">Filter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 
         {% load render_table from django_tables2 %}
         {% render_table table %}
