@@ -18,10 +18,9 @@ font-bold underline
             <a href="#">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-[--spectra-400]">Animal Types</h5>
             </a>
-            <p class="h-24 mb-3 font-normal text-gray-500">Define and manage animal types to organize your herd more
-                effectively.</p>
+            <p class="h-24 mb-3 font-normal text-gray-500">Easily define and categorize the general types of animals in your herd (e.g., sheep, goats, camels). This classification helps structure your data and manage your animals more efficiently.</p>
             <a href="{% url 'animals:all_types_view' %}" class="float-end inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
-                <p>All Types</p>
+                <p>View All Animal Types</p>
                 <span class="material-symbols-outlined">arrow_forward</span>
             </a>
         </div>
@@ -32,10 +31,9 @@ font-bold underline
                 <a href="#">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-[--spectra-400]">Animal Breeds</h5>
                 </a>
-                <p class="h-24 mb-3 font-normal text-gray-500">Define and manage breeds associated with each animal type to
-                    better classify your herd.</p>
+                <p class="h-24 mb-3 font-normal text-gray-500">Add and manage specific breeds associated with each animal type. This enables more accurate tracking, reporting, and application of breed-specific data such as weights and vaccinations.</p>
                 <a href="{% url 'animals:all_breeds_view' %}" class="float-end  inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
-                    <p>All Breeds</p>
+                    <p>View All Breeds</p>
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
         </div>
@@ -46,9 +44,9 @@ font-bold underline
             <a href="#">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-[--spectra-400]">Animals</h5>
             </a>
-            <p class="h-24 mb-3 font-normal text-gray-500">Manage individual animals in your herd, including adding, editing, viewing, and removing animals with their full details.</p>
+            <p class="h-24 mb-3 font-normal text-gray-500">Maintain detailed records for each animal in your herd. You can add, edit, and review full animal profiles including images, birth dates, breed, weight history, and vaccination records.</p>
             <a href="{% url 'animals:all_animals_view' %}" class="float-end inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
-                <p>All Animals</p>
+                <p>View All Animals</p>
                 <span class="material-symbols-outlined">arrow_forward</span>
             </a>
         </div>
@@ -59,13 +57,27 @@ font-bold underline
             <a href="#">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-[--spectra-400]">Ideal Weight</h5>
             </a>
-            <p class="h-24 mb-3 font-normal text-gray-500">Define ideal weight ranges by breed, age, and gender to track and evaluate healthy growth patterns.</p>
+            <p class="h-24 mb-3 font-normal text-gray-500">Define ideal weight ranges for animals based on their breed, gender, and age. Use this data to monitor health and growth, and receive alerts when an animal's weight falls outside the expected range.</p>
             <a href="{% url 'animals:all_ideal_weight_view' %}" class="float-end inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
-                <p>All Ideal Weight</p>
+                <p>View All Ideal Weight</p>
                 <span class="material-symbols-outlined">arrow_forward</span>
             </a>
         </div>
     </div>
+
+        <div class="w-96 flex md:flex-row flex-col justify-center gap-4">
+        <div class="p-6 h-[25vh] bg-gray-100 rounded-lg shadow-sm">
+            <a href="#">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-[--spectra-400]">Vaccine Types</h5>
+            </a>
+            <p class="h-24 mb-3 font-normal text-gray-500">Set up vaccine types specific to each breed and gender, along with the recommended age range for application. This helps ensure timely vaccinations and identify any missing doses.</p>
+            <a href="{% url 'animals:all_vaccine_types_view' %}" class="float-end inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-[--spectra-400] rounded-lg hover:bg-[--spectra-600]">
+                <p>View All Vaccine Types</p>
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+        </div>
+    </div>
+
 
 
 </div>

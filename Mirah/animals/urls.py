@@ -30,5 +30,13 @@ urlpatterns = [
     path("weights/ideal/add/", views.add_ideal_weight_view, name="add_ideal_weight_view"),
     path("weights/ideal/<int:ideal_weight_id>/edit/", views.edit_ideal_weight_view, name="edit_ideal_weight_view"),
     path("weights/ideal/<int:ideal_weight_id>/delete/", views.delete_ideal_weight_view, name="delete_ideal_weight_view"),
+    #Vaccine Types
+    path("vaccine/type/all/", views.all_vaccine_types_view, name="all_vaccine_types_view"),
+    path("vaccine/type/add/", views.add_vaccine_type_view, name="add_vaccine_type_view"),
+    path("vaccine/type/<int:vtype_id>/edit/", views.edit_vaccine_type_view, name="edit_vaccine_type_view"),
+    path("vaccine/type/<int:vtype_id>/delete/", views.delete_vaccine_type_view, name="delete_vaccine_type_view"),
+    #Vaccine Record
+    path("vaccine/<int:animal_id>/add/", views.add_vaccine_record_view, name="add_vaccine_record_view"),
+    path("vaccine/delete/<int:animal_id>", views.delete_vaccine_record_view, name="delete_vaccine_record_view"),
 
 ] 

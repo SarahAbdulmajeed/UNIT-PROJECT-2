@@ -1,5 +1,5 @@
 import django_filters
-from .models import AnimalType, Breed, Animal, IdealWeight
+from .models import AnimalType, Breed, Animal, IdealWeight, VaccineType
 
 class TypeFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_expr='icontains', label='Search by Name')
@@ -23,3 +23,9 @@ class IdealWeightFilter(django_filters.FilterSet):
     class Meta:
         model = IdealWeight 
         fields = ['breed', 'gender', 'age_from_days', 'age_to_days' ,'ideal_min_weight', 'ideal_max_weight'] 
+
+class VaccineTypeFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(lookup_expr='icontains', label='Search by Name')
+    class Meta:
+        model = VaccineType 
+        fields = ['name', 'description', 'breed', 'gender', 'age_from_days', 'age_to_days'] 

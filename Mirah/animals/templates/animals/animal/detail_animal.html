@@ -146,12 +146,10 @@ font-bold underline
 
                 <!-- Weight Records -->
                 <div class="flex flex-col self-center">
-                    
                     <div class="flex md:flex-row flex-col gap-4">
                         {% load render_table from django_tables2 %}
                         {% render_table weightRecordTable %}
                     </div>
-
                 </div>
 
             </div>
@@ -160,8 +158,71 @@ font-bold underline
         <div class="rounded-b-lg w-full text-end">
             <a href="{% url 'animals:add_weight_record_view' animal.pk%}"><button class="font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-30] my-2 px-10 py-2 rounded-md">Add Weight Record<button></button></a>
         </div>
-
         
+        <br>
+
+        <!-- Vaccine Records -->
+        <details open>
+            <summary class="flex flex-row items-center gap-2  text-[--bon-jour-30] font-semibold h-8 select-none bg-[--spectra-400] rounded-t-lg content-center justify-center">Vaccination Record</summary>
+            <div class="flex flex-col bg-[--bon-jour-20] rounded-b-lg  p-4">
+
+
+{% if vaccination_status == "complete" %}
+            <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50"
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    <span class="font-medium font-bold"><strong>Vaccinations Up to Date!</strong></span> 
+                    This animal has received all required vaccinations for its current age, breed, and gender. Great job keeping up with its health care!
+                </div>
+            </div>
+{% elif vaccination_status == "incomplete" %}
+            <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    <span class="font-medium font-bold"><strong>Missing Vaccinations!</strong></span> 
+                    This animal is missing the following required vaccinations based on its age, breed, and gender. Please consider administering them as soon as possible:
+                    <ul class="list-disc list-inside mt-2">
+                        {% for vaccine in missing_vaccinations %}
+                            <li>{{ vaccine.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+{% elif vaccination_status == "no_required" %}
+            <div class="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50"
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    <span class="font-medium"><strong>No Vaccination Reference!</strong></span> 
+                    There are no registered vaccine guidelines for this animal's breed and gender. Please ensure vaccination schedules are defined in the system.
+                </div>
+            </div>
+{% endif %}
+
+                
+                <div class="flex flex-col self-center">
+                    <div class="flex md:flex-row flex-col gap-4">
+                        {% load render_table from django_tables2 %}
+                        {% render_table vaccinationRecordTable %}
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <div class="rounded-b-lg w-full text-end">
+            <a href="{% url 'animals:add_vaccine_record_view' animal.pk%}"><button class="font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-30] my-2 px-10 py-2 rounded-md">Add Vaccination Record<button></button></a>
+        </div>
 
     </div>
 </div>

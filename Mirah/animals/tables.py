@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import AnimalType, Breed, Animal, WeightRecord, IdealWeight
+from .models import AnimalType, Breed, Animal, WeightRecord, IdealWeight, VaccineType, VaccinationRecord
 
 class TypeTable(tables.Table):
     actions = tables.TemplateColumn(template_name='animals/actions/TypesTable_actions.html', orderable=False)
@@ -40,4 +40,20 @@ class IdealWeightTable(tables.Table):
         model = IdealWeight
         template_name = "django_tables2/table.html"
         fields = ("breed","age_from_days","age_to_days","ideal_min_weight","ideal_max_weight","gender")
+        attrs = {"class": "custom-django-table"}
+
+class VaccineTypeTable(tables.Table):
+    actions = tables.TemplateColumn(template_name='animals/actions/VaccineTypeTable_actions.html', orderable=False)
+    class Meta:
+        model = VaccineType
+        template_name = "django_tables2/table.html"
+        fields = ("name","breed","gender","age_from_days","age_to_days")
+        attrs = {"class": "custom-django-table"}
+
+class VaccinationRecordTable(tables.Table):
+    actions = tables.TemplateColumn(template_name='animals/actions/VaccinationRecordTable_actions.html', orderable=False)
+    class Meta:
+        model = VaccinationRecord
+        template_name = "django_tables2/table.html"
+        fields = ("vaccine_type","date_given","notes","document")
         attrs = {"class": "custom-django-table"}

@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest, HttpResponse
-from .models import AnimalType, Breed, Animal, WeightRecord, IdealWeight
-from .forms import AnimalTypeForm, BreedForm, AnimalForm, WeightRecordForm, IdealWeightForm
-from .tables import TypeTable, BreedTable ,AnimalTable, WeightRecordTable, IdealWeightTable
-from .filters import TypeFilter, BreedFilter, AnimalFilter, IdealWeightFilter
+from .models import AnimalType, Breed, Animal, WeightRecord, IdealWeight, VaccineType, VaccinationRecord
+from .forms import AnimalTypeForm, BreedForm, AnimalForm, WeightRecordForm, IdealWeightForm, VaccineTypeForm, VaccinationRecordForm
+from .tables import TypeTable, BreedTable ,AnimalTable, WeightRecordTable, IdealWeightTable, VaccineTypeTable, VaccinationRecordTable
+from .filters import TypeFilter, BreedFilter, AnimalFilter, IdealWeightFilter, VaccineTypeFilter
 from django_tables2 import RequestConfig
 from datetime import date
 from dateutil.relativedelta import relativedelta
@@ -145,6 +145,8 @@ def detail_animal_view(request:HttpRequest, animal_id: int):
 
     #fetch weight records 
     weight_record_table = WeightRecordTable(WeightRecord.objects.filter(animal=animal))
+    #fetch vaccination records
+    vaccination_record_table = VaccinationRecordTable(VaccinationRecord.objects.filter(animal=animal))
     
     #last weight 
     last_weight_obj = WeightRecord.objects.filter(animal=animal).order_by('-date').first()
@@ -167,8 +169,24 @@ def detail_animal_view(request:HttpRequest, animal_id: int):
     else:
         print("no weight records")
 
+    #check the vaccination records 
+    all_required_vaccination = VaccineType.objects.filter(breed=animal.breed, gender=animal.gender)
+    current_vaccinations = VaccinationRecord.objects.filter(animal=animal)
+    given_vaccine_ids = current_vaccinations.values_list('vaccine_type__id', flat=True)
+    missing_vaccinations = all_required_vaccination.exclude(id__in=given_vaccine_ids)
+
+    if not all_required_vaccination.exists():
+        vaccination_status = "no_required"
+    elif missing_vaccinations.exists():
+        vaccination_status = "incomplete"
+    else:
+        vaccination_status = "complete"
+
+
     RequestConfig(request,paginate={"per_page": 3}).configure(weight_record_table)
-    return render(request,"animals/animal/detail_animal.html", {"animal":animal, "weightRecordTable":weight_record_table,"age_format":age_format, "last_weight_record":last_weight_record, "age_in_days":age_in_days, "weight_status":weight_status})
+    RequestConfig(request,paginate={"per_page": 3}).configure(vaccination_record_table)
+
+    return render(request,"animals/animal/detail_animal.html", {"animal":animal, "weightRecordTable":weight_record_table, "vaccinationRecordTable":vaccination_record_table, "age_format":age_format, "last_weight_record":last_weight_record, "age_in_days":age_in_days, "weight_status":weight_status, "vaccination_status": vaccination_status, "missing_vaccinations": missing_vaccinations,})
 
 #=========[ Weight Record ]=========
 def add_weight_record_view(request:HttpRequest, animal_id:int):
@@ -228,3 +246,61 @@ def delete_ideal_weight_view(request:HttpRequest, ideal_weight_id:int):
     ideal_weight = IdealWeight.objects.get(pk=ideal_weight_id)
     ideal_weight.delete()
     return redirect("animals:all_ideal_weight_view")
+
+#=========[ Vaccine Types ]=========
+def all_vaccine_types_view(request:HttpRequest):
+    types = VaccineType.objects.all()
+    filter = VaccineTypeFilter(request.GET, queryset=types)
+    table = VaccineTypeTable(filter.qs)
+    return render(request,"animals/vaccine_types/all.html",{"table":table, "filter":filter})
+
+def add_vaccine_type_view(request:HttpRequest):
+    if request.method == "POST":
+       form = VaccineTypeForm(request.POST)
+       if form.is_valid():
+           form.save()
+           return redirect('animals:all_vaccine_types_view')
+       else:
+           print(form.errors)
+    else:
+        form = VaccineTypeForm()
+    return render(request,"animals/vaccine_types/add.html",{"form":form})
+
+def edit_vaccine_type_view(request:HttpRequest, vtype_id:int):
+    type = VaccineType.objects.get(pk=vtype_id)
+    if request.method == "POST":
+        form = VaccineTypeForm(request.POST, instance=type)
+        if form.is_valid():
+            form.save()
+            return redirect('animals:all_vaccine_types_view')
+        else:
+            print(form.errors)
+    else:
+        form = VaccineTypeForm(instance=type)
+    return render(request,"animals/vaccine_types/edit.html",{"form":form, "type":type})
+
+def delete_vaccine_type_view(request:HttpRequest, vtype_id:int):
+    vaccine_type = VaccineType.objects.get(pk = vtype_id)
+    vaccine_type.delete()
+    return redirect("animals:all_vaccine_types_view")
+
+#=========[ Vaccine Records ]=========
+def add_vaccine_record_view(request:HttpRequest, animal_id:int):
+    animal = get_object_or_404(Animal, id=animal_id)
+    if request.method == "POST":
+        form = VaccinationRecordForm(request.POST, request.FILES)
+        if form.is_valid():
+            vaccination_record = form.save(commit=False)
+            vaccination_record.animal = animal
+            vaccination_record.save()
+            return redirect("animals:detail_animal_view", animal_id=animal.pk)
+    else:
+        form = VaccinationRecordForm()
+
+    return render(request, "animals/vaccination_record/add.html", {"form": form, "animal": animal})
+
+def delete_vaccine_record_view(request:HttpRequest, animal_id:int):
+    vaccination_record = get_object_or_404(VaccinationRecord, id=animal_id)
+    animal_id = vaccination_record.animal.id
+    vaccination_record.delete()
+    return redirect("animals:detail_animal_view", animal_id=animal_id)

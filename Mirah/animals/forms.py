@@ -1,5 +1,5 @@
 from django import forms
-from .models import AnimalType, Breed, Animal, WeightRecord, IdealWeight
+from .models import AnimalType, Breed, Animal, WeightRecord, IdealWeight, VaccineType, VaccinationRecord
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Row, Column
 from django.urls import reverse_lazy
@@ -8,6 +8,11 @@ import datetime
 class AnimalTypeForm(forms.ModelForm):
     class Meta:
         model = AnimalType
+        fields = "__all__"
+
+class VaccineTypeForm(forms.ModelForm):
+    class Meta:
+        model = VaccineType
         fields = "__all__"
 
 class BreedForm(forms.ModelForm):
@@ -51,6 +56,25 @@ class AnimalForm(forms.ModelForm):
             self.fields["breed"].queryset = Breed.objects.filter(animal_type=self.instance.animal_type)
         else:
             self.fields["breed"].queryset = Breed.objects.none()
+
+class VaccinationRecordForm(forms.ModelForm):
+    class Meta:
+        model = VaccinationRecord
+        fields = [
+            'vaccine_type',
+            'date_given',
+            'notes',
+            'document',
+            ]
+        widgets = {
+            'date_given': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+    def clean_date(self):
+        date = self.cleaned_data["date_given"]
+        if date > datetime.date.today():
+            raise forms.ValidationError("date given cannot be in the future.")
+        return date
 
 
 class WeightRecordForm(forms.ModelForm):

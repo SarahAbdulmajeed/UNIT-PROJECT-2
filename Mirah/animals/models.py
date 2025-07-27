@@ -33,6 +33,28 @@ class IdealWeight(models.Model):
     ideal_max_weight = models.DecimalField(max_digits=5, decimal_places=2)
     gender = models.CharField(max_length=1, choices=GenderChoices.choices)
 
+class VaccineType(models.Model):
+    class GenderChoices(models.TextChoices):
+        MALE = "M", "Male"
+        FEMALE = "F", "Female"
+
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    breed = models.ForeignKey('Breed', on_delete=models.PROTECT)
+    gender = models.CharField(max_length=1, choices=GenderChoices.choices)
+    age_from_days = models.PositiveIntegerField()
+    age_to_days = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.name
+
+class VaccinationRecord(models.Model):
+    animal = models.ForeignKey('Animal', on_delete=models.CASCADE)
+    vaccine_type = models.ForeignKey('VaccineType', on_delete=models.PROTECT)
+    date_given = models.DateField()
+    notes = models.TextField(blank=True)
+    document = models.FileField(upload_to="vaccinations/", blank=True, null=True)
+
 
 class Animal(models.Model):
     class GenderChoices(models.TextChoices):
