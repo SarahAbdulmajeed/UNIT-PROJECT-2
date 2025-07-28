@@ -1,4 +1,5 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
 {% block title %} 
   Home
@@ -15,12 +16,66 @@
     Your browser does not support the video tag.
   </video>
 
+
   <div class="relative z-10 flex flex-col justify-center items-center h-[50vh] text-[#e4dfdf] bg-gradient-to-r from-[#315052]/100 from-0% via-[#315052]/75 via-50% to-[#315052]/100 to-100%">
-    <h1 class="text-5xl font-bold mb-4">Welcome To Mirah</h1>
-    <p class="text-xl">A smart system to track, document, and manage your herd.</p>
+    <h1 class="text-5xl font-bold mb-4 animate__animated animate__fadeInDown animate__repeat-1">Welcome To Mirah</h1>
+    <p class="text-xl animate__animated animate__slideInUp animate__repeat-1">A smart system to track, document, and manage your herd.</p>
   </div>
 </div>
 
+<div class="relative">
+  <section class="py-36 bg-white text-center">
+    <h2 class="text-3xl font-bold text-[--spectra-400] mb-8">How It Works ?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 max-w-6xl mx-auto divide-x divide-gray-200">
+      <div class="px-4 text-[--spectra-400]">
+        <div class="text-5xl mb-4">1</div>
+        <h3 class="text-xl font-semibold text mb-2">Add Animal Types & Breeds</h3>
+        <p class="text-gray-600">Start by defining animal types and their breeds for better organization.</p>
+      </div>
+      <div class="px-4 text-[--spectra-400]">
+        <div class="text-5xl mb-4">2</div>
+        <h3 class="text-xl font-semibold mb-2">Register Your Animals</h3>
+        <p class="text-gray-600">Add animals with full details including images, gender, birth date, and more.</p>
+      </div>
+      <div class="px-4 text-[--spectra-400]">
+        <div class="text-5xl mb-4">3</div>
+        <h3 class="text-xl font-semibold mb-2">Track Weights & Vaccines</h3>
+        <p class="text-gray-600">Monitor your herd's health by recording weights and vaccinations.</p>
+      </div>
+    </div>
+  </section>
 
+  <img class="w-full" src="{% static 'images/element_02.svg' %}" alt="divider image"> 
+  
+  <section class="pt-8 pb-36 bg-[--bon-jour-20] text-center">
+    <h2 class="text-3xl font-bold text-[--spectra-400] mb-10">Explore the System</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 max-w-6xl mx-auto">
+      <a href="{% url 'animals:all_types_view' %}" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold mb-2 text-[--spectra-400]">Animal Types</h3>
+        <p class="text-gray-600">Organize your animals into types like sheep, goats, cows, etc.</p>
+      </a>
+      <a href="{% url 'animals:all_breeds_view' %}" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold mb-2 text-[--spectra-400]">Animal Breeds</h3>
+        <p class="text-gray-600">Classify animals further by breed within each type.</p>
+      </a>
+      <a href="{% url 'animals:all_animals_view' %}" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold mb-2 text-[--spectra-400]">Animals</h3>
+        <p class="text-gray-600">View, edit, and track all registered animals in your herd.</p>
+      </a>
+      <a href="{% url 'animals:all_ideal_weight_view' %}" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold mb-2 text-[--spectra-400]">Ideal Weights</h3>
+        <p class="text-gray-600">Define weight ranges by age, breed, and gender.</p>
+      </a>
+      <a href="{% url 'animals:all_vaccine_types_view' %}" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold mb-2 text-[--spectra-400]">Vaccines</h3>
+        <p class="text-gray-600">Set up vaccination schedules to keep your herd healthy.</p>
+      </a>
+    </div>
+
+
+  </section>
+
+
+</div>
 
 {% endblock %}

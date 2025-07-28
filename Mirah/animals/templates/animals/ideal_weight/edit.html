@@ -2,11 +2,10 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-Edit Animal Type
+Edit Ideal Weight
 {% endblock %}
 
-
-{% block current_page_animals %}
+{% block current_page_ideal_weights %}
 font-bold underline
 {% endblock %}
 
@@ -20,7 +19,7 @@ font-bold underline
 
     <div class="w-full justify-self-center">
         <div class="rounded-t-lg bg-[--spectra-400] text-[--bon-jour-30] font-semibold h-8 content-center justify-items-center">
-            <p>Edit Type</p>
+            <p>Edit Ideal Weight</p>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"></script>
         <form action="{% url 'animals:edit_ideal_weight_view' ideal_weight_range.pk%}" method="post" enctype="multipart/form-data">
@@ -30,7 +29,7 @@ font-bold underline
             </div>
 
             <div class="rounded-b-lg w-full text-end">
-                <input class="font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-30] my-2 px-10 py-2 rounded-md" type="submit" value="Edit Type" />
+                <input class="font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-30] my-2 px-10 py-2 rounded-md" type="submit" value="Edit Ideal Weight" />
             </div>
 
         </form>

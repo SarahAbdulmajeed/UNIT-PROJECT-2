@@ -1,17 +1,16 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-Animals Types
+All Animal Types 
 {% endblock %}
 
-{% block current_page_animals %}
+{% block current_page_types %}
 font-bold underline
 {% endblock %}
 
 {% block content %}
 <div class="w-[80%] justify-self-center ">
     <div class="flex flex-row pt-8 pb-12 gap-4 text-[--spectra-400]">
-        <span class="material-symbols-outlined place-content-center"><a href="{% url 'animals:animals_view' %}">arrow_back</a></span>
         <h2 class="text-3xl font-semibold">Animal Types</h2>
     </div>
 
@@ -28,7 +27,7 @@ font-bold underline
                     </button>
                 </div>
             <div class="rounded-b-lg w-26 text-center text-right font-semibold bg-[--spectra-400] hover:bg-[--spectra-600] text-[--bon-jour-20] my-2 px-4 py-2 rounded-md self-end transition duration-300 ease-in-out">
-                <a href="{% url 'animals:add_type_view' %}">Add Type</a>
+                <a href="{% url 'animals:add_type_view' %}">Add Animal Type</a>
             </div>
        </div>
 

@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,200,0,-25" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
 
   <style>
     :root { 
@@ -109,13 +111,12 @@
             <div class="hidden w-full md:block md:w-auto" id="navbar-main">
                 <ul class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 mt-4 md:mt-0 bg-white md:bg-transparent p-4 md:p-0 border md:border-none rounded-sm text-[--spectra-400]">
                     <li class="hover:underline underline-offset-8 {% block current_page_home%} {% endblock %}"><a href="{% url 'main:home_view' %}">Home</a></li>
-                    <li class="hover:underline underline-offset-8 {% block current_page_animals %} {% endblock %}"><a href="{% url 'animals:animals_view' %}">Animals</a></li>
-                    <li class="hover:underline underline-offset-8 {% block current_page_groups %} {% endblock %}"><a href="#">Groups</a></li>
-                    <li class="hover:underline underline-offset-8 {% block current_page_health %} {% endblock %}"><a href="#">Health</a></li>
-                    <li class="hover:underline underline-offset-8 {% block current_page_reports %} {% endblock %}"><a href="#">Reports</a></li>
-                    <li>
-                        <a href="#"><img class="w-6 h-6 object-contain" src="{% static 'images/icon_translation_02.png' %}" alt="Translate"></a>
-                    </li>
+                    <li class="hover:underline underline-offset-8 {% block current_page_about%} {% endblock %}"><a href="{% url 'main:about_view' %}">About</a></li>
+                    <li class="hover:underline underline-offset-8 {% block current_page_animals %} {% endblock %}"><a href="{% url 'animals:all_animals_view' %}">Animals</a></li>
+                    <li class="hover:underline underline-offset-8 {% block current_page_types %} {% endblock %}"><a href="{% url 'animals:all_types_view' %}">Animal Types</a></li>
+                    <li class="hover:underline underline-offset-8 {% block current_page_breeds %} {% endblock %}"><a href="{% url 'animals:all_breeds_view' %}">Breeds</a></li>
+                    <li class="hover:underline underline-offset-8 {% block current_page_ideal_weights %} {% endblock %}"><a href="{% url 'animals:all_ideal_weight_view' %}">Ideal Weights</a></li>
+                    <li class="hover:underline underline-offset-8 {% block current_page_vaccine_types %} {% endblock %}"><a href="{% url 'animals:all_vaccine_types_view' %}">Vaccines</a></li>
                 </ul>
             </div>
         </div>
@@ -129,8 +130,8 @@
     </main>
 
 
-    <div class="bg-[--spectra-400] mt-8">
-        <footer class="w-[90%] place-self-center py-4">
+    <div class="bg-[--spectra-400]">
+        <footer class="w-[90%] place-self-center py-8">
             <div class="flex md:flex-row flex-col justify-start md:justify-between">
                 <div class="flex flex-col place-self-center gap-4">
                     <a href="#" class="place-self-center"><img src="{% static 'images/logo_mirah_02.png' %}" class="h-12 ml-2" alt="Mirah Logo"></a>
@@ -138,8 +139,13 @@
                 </div>
                 <nav class="my-4 content-center">
                     <ul class="flex md:flex-row flex-col place-self-center gap-4 text-[--bon-jour-30]">
-                        <li>About</li>
-                        <li>Contact</li>
+                        <li><a href="{% url 'main:home_view' %}">Home</a></li>
+                        <li><a href="{% url 'main:about_view' %}">About</a></li>
+                        <li><a href="{% url 'animals:all_animals_view' %}">Animals</a></li>
+                        <li><a href="{% url 'animals:all_types_view' %}">Animal Types</a></li>
+                        <li><a href="{% url 'animals:all_breeds_view' %}">Breeds</a></li>
+                        <li><a href="{% url 'animals:all_ideal_weight_view' %}">Ideal Weights</a></li>
+                        <li><a href="{% url 'animals:all_vaccine_types_view' %}">Vaccines</a></li>
                     </ul>
                 </nav>
             </div>

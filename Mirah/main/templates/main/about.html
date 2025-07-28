@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %} 
+About
+{% endblock %}
+
+{% block current_page_about %}
+font-bold underline
+{% endblock %}
+
+{% block content%}
+<section class="py-16 px-6 max-w-5xl mx-auto text-center">
+  <h1 class="text-4xl font-bold text-[--spectra-400] mb-6">About Mirah</h1>
+  <div class="flex md:flex-row flex-col gap-4">
+    <div>
+      <p class="text-left text-lg text-gray-700 mb-4">
+        <strong>"Marah"</strong> is an Arabic word that refers to the resting place for livestock after grazing — a safe, familiar space where animals gather, rest, and are cared for. Traditionally, it's a central part of pastoral life, reflecting care, routine, and connection to the herd.
+      </p>
+      <div class="mt-10 text-left">
+        <h2 class="text-2xl font-semibold text-[--spectra-400] mb-4">Key Features:</h2>
+        <ul class="list-disc list-inside text-gray-700 space-y-2">
+          <li>Animal registration with full details and images</li>
+          <li>Dynamic breed and type management</li>
+          <li>Weight record tracking and ideal weight comparison</li>
+          <li>Vaccination schedule and monitoring</li>
+          <li>User-friendly and responsive interface</li>
+          <li>Cloud media storage integration</li>
+        </ul>
+      </div>
+    </div>
+    <div class="justify-items-center">
+      <img class="w-[1000px] rounded-lg" src="{% static 'images/about_image_01.png' %}" alt="livestock image with Mirah logo"> 
+    </div>
+  </div>
+  <div class="mt-8 text-gray-500 text-sm text-center">
+    <p>Developed as part of a Django-based academic project by [Sarah Abdulmajeed Alsmari].</p>
+  </div>
+</section>
+{% endblock %}
